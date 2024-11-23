@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Countdown Timer</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1 id="countdownPurpose"></h1>
+    <div id="timer">
+      <span id="days">00</span> : 
+      <span id="hours">00</span> : 
+      <span id="minutes">00</span> : 
+      <span id="seconds">00</span>
+    </div>
+    <button id="stop-btn">Stop Countdown</button>
+  </div>
+  <div id="confirmationPopup" class="hidden">
+    <div class="popup">
+      <p>Are you sure you want to stop the countdown?</p>
+      <button id="confirmYes">Yes</button>
+      <button id="confirmNo">No</button>
+    </div>
+  </div>
+  <script src="countdownPageScript.js"></script>
+</body>
+</html>
