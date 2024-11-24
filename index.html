@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Countdown Setup</title>
   <link rel="stylesheet" href="indexStyle.css">
+  <link rel="stylesheet" href="datePickerStyle.css">
 </head>
 <body>
    <div class="form-container">
@@ -17,8 +18,49 @@
       <button type="submit">Start Countdown</button>
     </form>
    </div>
+   <button class="ChooseDate">Choose Date</button>
+  <div class="datePicker hidden">
+    <div class="light">
+      <div class="calendar">
+        <div class="calendar-header">
+            <span class="month-picker" id="month-picker">February</span>
+            <div class="year-picker">
+                <span class="year-change" id="prev-year">
+                    <pre><</pre>
+                </span>
+                <span id="year">2021</span>
+                <span class="year-change" id="next-year">
+                    <pre>></pre>
+                </span>
+            </div>
+        </div>
+        <div class="calendar-body">
+            <div class="calendar-week-day">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="calendar-days"></div>
+        </div>
+        <div class="calendar-footer">
+            <div class="toggle">
+                <span></span>
+                <div class="dark-mode-switch">
+                    <div class="dark-mode-switch-ident"></div>
+                </div>
+            </div>
+        </div>
+        <div class="month-list"></div>
+    </div>
+  </div>
+  </div>
     <video src="indexPageBG.mp4" muted autoplay loop type="video/mp4">Your Browswer Does Not Support the Video Tag</video>
 
   <script src="index.js"></script>
+  <script src="datePickerScript.js"></script>
 </body>
 </html>
