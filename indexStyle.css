@@ -1,11 +1,11 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: quantico;
     text-align: center;
     background-color: #f0f8ff;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #333;
+    color: #ffffff;
     margin: 0;
     padding: 0;
   }
@@ -19,42 +19,125 @@ body {
     z-index: -1; /* Send video behind all other content */
 }
 
-.form-container {
-  background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
-  padding: 20px 30px;
-  border-radius: 8px;
-  color: white;
-  text-align: center;
-  width: 300px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+
+#title {
+  font-size: 8rem;
 }
 
-.form-container h2 {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
+.input-group {
+  position: absolute;
+  top: 18rem;
+  width: 900px;
+  
 }
 
-.form-container input[type="text"],
-.form-container input[type="date"],
-.form-container button {
+#purpose {
   width: 100%;
   padding: 10px;
-  margin-bottom: 15px;
   border: none;
   border-radius: 4px;
+  font-family: quantico;
+  color: #fff;
+  background-color: transparent;
+  outline: 2px solid #fff;
 }
 
-.form-container input {
-  background: #f2f2f2;
+.input-label {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  font-family: quantico;
+  transform: translateY(-50%);
+  transition: all 0.25s ease;
+  pointer-events: none; /* Prevents the label from being clicked */
+  color: #fff;
+  background-color: transparent;
+  padding-inline: 0;
 }
 
-.form-container button {
-  background: #007BFF;
-  color: white;
-  font-size: 1rem;
+#purpose:focus + .input-label,
+#purpose:not(:placeholder-shown) + .input-label {
+  transform: translateY(-30px) scale(0.8);
+  color: #d1c5fc;
+  padding-inline: 0px;
+  background-color: #242329;
+}
+
+#purpose:focus {
+  outline-color: #d1c5fc;
+}
+
+.chooseDate {
+  position: absolute;
+  font-family: quantico;
+  top: 22rem;
+  right: 66.9rem;
+}
+
+.chooseDate {
+  width: 130px;
+  height: 60px;
   cursor: pointer;
+  background: transparent;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
 }
 
-.form-container button:hover {
-  background: #0056b3;
+svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 150 480;
+  stroke-dashoffset: 150;
+  transition: 1s ease-in-out;
+}
+
+.chooseDate:hover {
+  transition: 1s ease-in-out;
+  background: #4F95DA;
+}
+
+.chooseDate:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.chooseDate span {
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+.startCountdown {
+  position: absolute;
+  font-family: quantico;
+  top: 22rem;
+  right: 22.3em;
+}
+
+.startCountdown {
+  width: 130px;
+  height: 60px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
+}
+
+.startCountdown:hover {
+  transition: 1s ease-in-out;
+  background: #4F95DA;
+}
+
+.startCountdown:hover svg {
+  stroke-dashoffset: -480;
+}
+
+.startCountdown span {
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
 }

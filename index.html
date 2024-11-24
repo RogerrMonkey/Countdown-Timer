@@ -6,20 +6,32 @@
   <title>Countdown Setup</title>
   <link rel="stylesheet" href="indexStyle.css">
   <link rel="stylesheet" href="datePickerStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-   <div class="form-container">
-    <h1>Set Your Countdown</h1>
+   <div class="form-container" >
+    <h1 id="title">Chrono Chime</h1>
+    <h2 id="tagline">To the last second, we've got you covered.</h2>
     <form id="countdownForm">
-      <label for="purpose">Purpose:</label>
-      <input type="text" id="purpose" name="purpose" placeholder="Enter the purpose..." required>
-      <label for="date">Countdown Date:</label>
-      <input type="date" id="date" name="date" required>
-      <button type="submit">Start Countdown</button>
+      <div class="input-group">
+        <input type="text" id="purpose" name="purpose" placeholder=" " required>
+        <label for="purpose" class="input-label">Enter the Purpose of the Countdown</label>
+      </div>
+      <button class="chooseDate"><svg width="130px" height="60px" viewBox="0 0 130 60" class="border">
+        <polyline points="129,1 129,59 1,59 1,1 129,1" class="bg-line" />
+        <polyline points="129,1 129,59 1,59 1,1 129,1" class="hl-line" />
+      </svg>
+      <span>Choose Date and time</span></button>
+      <button class="startCountdown" type="submit"><svg width="130px" height="60px" viewBox="0 0 130 60" class="border">
+        <polyline points="129,1 129,59 1,59 1,1 129,1" class="bg-line" />
+        <polyline points="129,1 129,59 1,59 1,1 129,1" class="hl-line" />
+      </svg>
+      <span>Start Countdown</span></button>
     </form>
    </div>
-   <button class="ChooseDate">Choose Date</button>
-  <div class="datePicker hidden">
+  <div class="datePicker">
     <div class="light">
       <div class="calendar">
         <div class="calendar-header">
@@ -53,6 +65,8 @@
                     <div class="dark-mode-switch-ident"></div>
                 </div>
             </div>
+            <button id="cancelConfirmDate">Cancel</button>
+            <button id="applyConfirmDate">Apply</button>
         </div>
         <div class="month-list"></div>
     </div>

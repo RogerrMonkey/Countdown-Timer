@@ -1,5 +1,5 @@
-var selectDateBtn = document.querySelector('ChooseDate');
-var datePickerDiv = document.querySelector('datePicker');
+var selectDateBtn = document.querySelector('.ChooseDate');
+var datePickerDiv = document.querySelector('.datePicker');
 
 
 
