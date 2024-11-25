@@ -1,7 +1,39 @@
-var selectDateBtn = document.querySelector('.ChooseDate');
 var datePickerDiv = document.querySelector('.datePicker');
+var cancelConfirmDate = document.getElementById('cancelConfirmDate');
+var applyConfirmDate = document.getElementById('applyConfirmDate');
+var selectedDateTimeSpan = document.getElementById('selectedDateTime');
+var hourPicker = document.querySelector('#hour-picker');
+var minutePicker = document.querySelector('#minute-picker');
+
+let selectedDate = null;
+let selectedTime = { hour: '00', minute: '00' };
 
 
+cancelConfirmDate.addEventListener('click', function (e) {
+    if (datePickerDiv.style.visibility === 'visible'){
+        datePickerDiv.style.visibility = 'hidden';
+    }
+});
+
+applyConfirmDate.addEventListener('click', function () {
+    if (selectedDate) {
+        const day = selectedDate.getDate().toString().padStart(2, '0'); // Pad single-digit days with leading zero
+        const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0'); // Pad single-digit months with leading zero
+        const year = selectedDate.getFullYear();
+        const hour = hourPicker.value || '00';
+        const minute = minutePicker.value || '00';
+        selectedTime = { hour, minute };
+
+        // Display the selected date and time
+        const formattedDate = `${day}/${month}/${year} ${hour}:${minute}`;
+        selectedDateTimeSpan.textContent = formattedDate;
+        localStorage.setItem("formattedDate", formattedDate);
+
+        
+    } else {
+        alert('Please select a date!');
+    }
+});
 
 let calendar = document.querySelector('.calendar')
 
@@ -51,9 +83,42 @@ generateCalendar = (month, year) => {
                 day.classList.add('curr-date')
             }
         }
+        day.addEventListener('click', () => {
+            const dayNumber = i - first_day.getDay() + 1;
+            selectedDate = new Date(year, month, dayNumber);
+            const previouslySelectedDay = calendar.querySelector('.selected');
+                if (previouslySelectedDay) {
+                    previouslySelectedDay.classList.remove('selected');
+                }
+            day.classList.add('selected')
+            
+
+            // Highlight the selected date
+            document.querySelectorAll('.calendar-day-hover').forEach(dayEl => dayEl.classList.remove('selected-date'));
+            day.classList.add('selected-date');
+        });
+
+        if (
+            i - first_day.getDay() + 1 === currDate.getDate() &&
+            year === currDate.getFullYear() &&
+            month === currDate.getMonth()
+        ) {
+            day.classList.add('curr-date');
+        }
+        
         calendar_days.appendChild(day)
     }
 }
+// Add styles to the selected date
+const style = document.createElement('style');
+style.textContent = `
+    .calendar-day-hover.selected-date {
+        background-color: #007bff;
+        color: white;
+        border-radius: 50%;
+    }
+`;
+
 
 let month_list = calendar.querySelector('.month-list')
 
@@ -90,3 +155,27 @@ document.querySelector('#next-year').onclick = () => {
     ++curr_year.value
     generateCalendar(curr_month.value, curr_year.value)
 }
+
+const populateTimePicker = () => {
+    const hourPicker = document.querySelector('#hour-picker');
+    const minutePicker = document.querySelector('#minute-picker');
+
+    // Populate hours (0-23)
+    for (let i = 0; i < 24; i++) {
+        const hourOption = document.createElement('option');
+        hourOption.value = i;
+        hourOption.textContent = i.toString().padStart(2, '0'); // Pad with leading zero
+        hourPicker.appendChild(hourOption);
+    }
+
+    // Populate minutes (0-59)
+    for (let i = 0; i < 60; i++) {
+        const minuteOption = document.createElement('option');
+        minuteOption.value = i;
+        minuteOption.textContent = i.toString().padStart(2, '0'); // Pad with leading zero
+        minutePicker.appendChild(minuteOption);
+    }
+};
+
+// Initialize Time Picker
+populateTimePicker();

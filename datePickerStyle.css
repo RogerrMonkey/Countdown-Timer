@@ -1,15 +1,9 @@
 :root {
-    --dark-body: #4d4c5a;
-    --dark-main: #141529;
-    --dark-second: #79788c;
-    --dark-hover: #323048;
-    --dark-text: #f8fbff;
-
-    --light-body: #f3f8fe;
-    --light-main: #fdfdfd;
-    --light-second: #c3c2c8;
-    --light-hover: #edf0f5;
-    --light-text: #151426;
+    --bg-body: #4d4c5a;
+    --bg-main: black; /* Semi-transparent dark background */
+    --bg-second: #79788c;
+    --color-hover: #323048;
+    --color-txt: #f8fbff;
 
     --blue: #0000ff;
     --white: #fff;
@@ -19,22 +13,6 @@
     --font-family: quantico;
 }
 
-.dark {
-    --bg-body: var(--dark-body);
-    --bg-main: var(--dark-main);
-    --bg-second: var(--dark-second);
-    --color-hover: var(--dark-hover);
-    --color-txt: var(--dark-text);
-}
-
-.light {
-    --bg-body: var(--light-body);
-    --bg-main: var(--light-main);
-    --bg-second: var(--light-second);
-    --color-hover: var(--light-hover);
-    --color-txt: var(--light-text);
-}
-
 * {
     padding: 0;
     margin: 0;
@@ -42,28 +20,25 @@
 }
 
 .datePicker {
-    height: 100vh;
     display: grid;
     place-items: center;
     font-family: var(--font-family);
-    background-color: var(--bg-body);
-    display: none;
+    background-color: var(--bg-main); /* Semi-transparent background */
+    position: absolute;
+    top: 21.8rem;
+    left: 30rem;
+    visibility: hidden;
+    transform: translateY(-20px); /* Start slightly off-screen */
+    transition: all 0.3s ease-in-out; /* Smooth transition */
+
+    height: fit-content; /* Fits the content dynamically */
+    width: fit-content; /* Ensures no unnecessary overflow */
+    border-radius: 30px; /* Rounded corners */
+    padding: 20px; /* Space inside the element */
+    overflow: hidden; /* Prevents content spilling out */
 }
 
-.calendar {
-    height: max-content;
-    width: max-content;
-    background-color: var(--bg-main);
-    border-radius: 30px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    /* transform: scale(1.25); */
-}
 
-.light .calendar {
-    box-shadow: var(--shadow);
-}
 
 .calendar-header {
     display: flex;
@@ -187,6 +162,11 @@
     display: none;
 }
 
+.calendar-days div.selected {
+    background-color: var(--blue);
+    border-radius: 50%;
+}
+
 .month-picker {
     padding: 5px 10px;
     border-radius: 10px;
@@ -268,3 +248,108 @@
         opacity: 1;
     }
 }
+
+.time-picker {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.time-picker-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-txt);
+    font-family: var(--font-family);
+}
+
+.time-picker-row span {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.time-picker-row select {
+    width: 70px;
+    padding: 5px;
+    border: 1px solid var(--bg-second);
+    border-radius: 5px;
+    background-color: var(--bg-main);
+    color: var(--color-txt);
+    font-family: var(--font-family);
+    font-size: 14px;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.time-picker-row select:hover {
+    border-color: var(--color-hover);
+    background-color: var(--color-hover);
+}
+
+
+#cancelConfirmDate {
+    font-family: quantico;
+    position: relative;
+    color: #fff;
+    height: 40px;
+    width: 90px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #91C9FF;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+.calenderSVG {
+    position: absolute;
+    fill: none;
+    stroke: #fff;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+  }
+
+  #cancelConfirmDate:hover {
+    transition: 1s ease-in-out;
+    background: #4F95DA;
+  }
+  
+  #cancelConfirmDate:hover svg {
+    stroke-dashoffset: -480;
+  }
+  
+  #cancelConfirmDate span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }
+
+  #applyConfirmDate {
+    font-family: quantico;
+    color: #fff;
+    position: relative;
+    height: 40px;
+    width: 90px;
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid #91C9FF;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+
+#applyConfirmDate:hover {
+    transition: 1s ease-in-out;
+    background: #4F95DA;
+  }
+  
+  #applyConfirmDate:hover svg {
+    stroke-dashoffset: -480;
+  }
+  
+  #applyConfirmDate span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }

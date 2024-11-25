@@ -26,7 +26,7 @@ body {
 
 .input-group {
   position: absolute;
-  top: 18rem;
+  top: 16rem;
   width: 900px;
   
 }
@@ -71,7 +71,7 @@ body {
   position: absolute;
   font-family: quantico;
   top: 22rem;
-  right: 66.9rem;
+  right: 66.4rem;
 }
 
 .chooseDate {
@@ -110,11 +110,12 @@ svg {
   font-weight: 100;
 }
 
+
 .startCountdown {
   position: absolute;
   font-family: quantico;
   top: 22rem;
-  right: 22.3em;
+  right: 18rem;
 }
 
 .startCountdown {
