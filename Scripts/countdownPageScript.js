@@ -1,23 +1,54 @@
 // Helper function to get cookie value by name
 function getCookie(name) {
-    const cookies = document.cookie.split("; ");
-    for (let cookie of cookies) {
-      const [key, value] = cookie.split("=");
-      if (key === name) {
-        return decodeURIComponent(value);
-      }
-    }
-    return null;
+  const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
+    const [key, value] = cookie.split('=');
+    acc[key] = decodeURIComponent(value);
+    return acc;
+  }, {});
+  return cookies[name];
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const countdownData = getOngoingCountdown();
+  if (countdownData) {
+    startCountdown(countdownData);
+  } else {
+    alert("No countdown in progress. Redirecting to the form page.");
+    window.location.href = "index.html"; // Replace with your actual form page URL
   }
+});
+
+function getOngoingCountdown() {
+  const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
+    const [key, value] = cookie.split('=');
+    acc[key] = decodeURIComponent(value);
+    return acc;
+  }, {});
+
+  return cookies['countdownData'] ? JSON.parse(cookies['countdownData']) : null;
+}
+
+function parseDateString(dateString) {
+  const [datePart, timePart] = dateString.split(" ");
+  const [day, month, year] = datePart.split("/").map(Number);
+  const [hours, minutes] = timePart.split(":").map(Number);
+
+  // Create and return the Date object
+  return new Date(year, month - 1, day, hours, minutes);
+}
+
   
   // Retrieve countdown data from cookies
   const countdownData = JSON.parse(getCookie("countdownData"));
+  console.log(countdownData)
   if (!countdownData) {
     // Redirect back to the input page if no active countdown exists
     window.location.href = "index.html";
   }
   
   const { purpose, date } = countdownData;
+  console.log(purpose)
+  const actualDate = parseDateString(date);
   document.getElementById("countdownPurpose").textContent = purpose;
   
   const daysEl = document.getElementById("days");
@@ -29,7 +60,7 @@ function getCookie(name) {
   let interval;
   
   function startCountdown() {
-    const countdownDate = new Date(date).getTime();
+    const countdownDate = new Date(actualDate).getTime();
   
     interval = setInterval(() => {
       const now = new Date().getTime();

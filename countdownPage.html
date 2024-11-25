@@ -4,26 +4,56 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Countdown Timer</title>
-  <link rel="stylesheet" href="countdownPageStyle.css">
+  <link rel="stylesheet" href="Styles/countdownPageStyle.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <h1 id="countdownPurpose"></h1>
   <div class="container">
     <h1 id="countdownPurpose"></h1>
     <div id="timer">
-      <span id="days">00</span> : 
-      <span id="hours">00</span> : 
-      <span id="minutes">00</span> : 
-      <span id="seconds">00</span>
+      <div class="time-unit">
+        <span id="days" class="time-value">00</span>
+        <span class="time-label">Days</span>
+      </div>
+      <div class="time-unit">
+        <span id="hours" class="time-value">00</span>
+        <span class="time-label">Hours</span>
+      </div>
+      <div class="time-unit">
+        <span id="minutes" class="time-value">00</span>
+        <span class="time-label">Minutes</span>
+      </div>
+      <div class="time-unit">
+        <span id="seconds" class="time-value">00</span>
+        <span class="time-label">Seconds</span>
+      </div>
     </div>
-    <button id="stop-btn">Stop Countdown</button>
+    <button id="stop-btn"><svg width="200px" height="60px" viewBox="0 0 200 60" class="border">
+      <polyline points="199,1 199,59 1,59 1,1 199,1" class="bg-line" />
+      <polyline points="199,1 199,59 1,59 1,1 199,1" class="hl-line" />
+    </svg>
+    <span>Stop Countdown</span></button>
   </div>
   <div id="confirmationPopup" class="hidden">
     <div class="popup">
       <p>Are you sure you want to stop the countdown?</p>
-      <button id="confirmYes">Yes</button>
-      <button id="confirmNo">No</button>
+      <button id="confirmYes"><svg id="popupSVG" width="90px" height="40px" viewBox="0 0 90 40" class="border">
+        <polyline points="89,1 89,39 1,39 1,1 89,1" class="bg-line" />
+        <polyline points="89,1 89,39 1,39 1,1 89,1" class="hl-line" />
+      </svg>
+      <span>Yes</span></button>
+      <button id="confirmNo"><svg id="popupSVG" width="90px" height="40px" viewBox="0 0 90 40" class="border">
+        <polyline points="89,1 89,39 1,39 1,1 89,1" class="bg-line" />
+        <polyline points="89,1 89,39 1,39 1,1 89,1" class="hl-line" />
+      </svg>
+      <span>No</span></button>
     </div>
   </div>
-  <script src="countdownPageScript.js"></script>
+  <video src="Resources/webPageBG.mp4" muted autoplay loop type="video/mp4">Your Browswer Does Not Support the Video Tag</video>
+  <audio src="Resources/countdownPageBGM.mp3" autoplay loop ></audio>
+  <script src="Scripts/countdownPageScript.js"></script>
 </body>
 </html>

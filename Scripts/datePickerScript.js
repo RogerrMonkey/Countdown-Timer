@@ -27,9 +27,7 @@ applyConfirmDate.addEventListener('click', function () {
         // Display the selected date and time
         const formattedDate = `${day}/${month}/${year} ${hour}:${minute}`;
         selectedDateTimeSpan.textContent = formattedDate;
-        localStorage.setItem("formattedDate", formattedDate);
-
-        
+        localStorage.setItem("sharedDate", formattedDate);     
     } else {
         alert('Please select a date!');
     }
@@ -91,7 +89,6 @@ generateCalendar = (month, year) => {
                     previouslySelectedDay.classList.remove('selected');
                 }
             day.classList.add('selected')
-            
 
             // Highlight the selected date
             document.querySelectorAll('.calendar-day-hover').forEach(dayEl => dayEl.classList.remove('selected-date'));
@@ -118,7 +115,6 @@ style.textContent = `
         border-radius: 50%;
     }
 `;
-
 
 let month_list = calendar.querySelector('.month-list')
 
@@ -167,7 +163,6 @@ const populateTimePicker = () => {
         hourOption.textContent = i.toString().padStart(2, '0'); // Pad with leading zero
         hourPicker.appendChild(hourOption);
     }
-
     // Populate minutes (0-59)
     for (let i = 0; i < 60; i++) {
         const minuteOption = document.createElement('option');
@@ -176,6 +171,5 @@ const populateTimePicker = () => {
         minutePicker.appendChild(minuteOption);
     }
 };
-
 // Initialize Time Picker
 populateTimePicker();

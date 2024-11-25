@@ -1,0 +1,206 @@
+/* General styling */
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-shadow: 0 0 10px #fff,
+  0 0 50px #fff;
+  font-family: quantico;
+}
+
+video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* Send video behind all other content */
+}
+
+
+/* Main container */
+.container {
+  text-align: center;
+  color: #f0f0f0;
+}
+
+/* Purpose heading */
+h1 {
+  font-size: 7rem;
+  margin-bottom: 20px;
+  position: absolute;
+  color: white;
+  top: 1%;
+}
+
+/* Timer layout */
+#timer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+  color: #f0f0f0;
+}
+
+.time-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #f0f0f0;
+}
+
+.time-value {
+  font-size: 4rem;
+  color: #f0f0f0;
+  font-weight: bold;
+}
+
+.time-label {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #f0f0f0;
+  text-transform: lowercase;
+}
+
+/* Stop button styling */
+#stop-btn {
+  width: 200px;
+  position: relative;
+  height: 60px;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid #91C9FF;
+  outline: none;
+  transition: 1s ease-in-out;
+  text-shadow: 0 0 10px #fff,
+  0 0 50px #fff;
+}
+
+svg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  fill: none;
+  stroke: #fff;
+  stroke-dasharray: 175 700;
+  stroke-dashoffset: 175;
+  transition: 1s ease-in-out;
+}
+
+#stop-btn:hover {
+  transition: 1s ease-in-out;
+  background: #4F95DA;
+}
+
+#stop-btn:hover svg {
+  stroke-dashoffset: -700;
+}
+
+#stop-btn span {
+  color: white;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+/* Confirmation popup styling */
+#confirmationPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup {
+  background: white;
+  padding: 20px;
+  text-shadow: 0 0 10px black,
+  0 0 50px black;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  color: black;
+}
+
+#confirmationPopup.hidden {
+  display: none;
+}
+
+#confirmYes {
+  font-family: quantico;
+    position: relative;
+    color: black;
+    background-color: black;
+    text-shadow: 0 0 10px black,
+    0 0 50px black;
+    height: 40px;
+    width: 90px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+#popupSVG {
+  position: absolute;
+    fill: none;
+    stroke: black;
+    stroke-dasharray: 150 480;
+    stroke-dashoffset: 150;
+    transition: 1s ease-in-out;
+}
+
+#confirmYes:hover {
+  transition: 1s ease-in-out;
+  background: grey;
+}
+
+#confirmYes:hover svg {
+  stroke-dashoffset: -480;
+}
+
+#confirmYes span {
+  color: black;
+  font-size: 18px;
+  font-weight: 100;
+}
+
+#confirmNo {
+  font-family: quantico;
+    position: relative;
+    color: black;
+    background-color: black;
+    text-shadow: 0 0 10px black,
+    0 0 50px black;
+    height: 40px;
+    width: 90px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    transition: 1s ease-in-out;
+}
+
+#confirmNo:hover {
+  transition: 1s ease-in-out;
+  background: grey;
+}
+
+#confirmNo:hover svg {
+  stroke-dashoffset: -480;
+}
+
+#confirmNo span {
+  color: black;
+  font-size: 18px;
+  font-weight: 100;
+}

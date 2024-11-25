@@ -4,6 +4,7 @@
     --bg-second: #79788c;
     --color-hover: #323048;
     --color-txt: #f8fbff;
+    --color-currDate: #fa7a39;
 
     --blue: #0000ff;
     --white: #fff;
@@ -23,6 +24,8 @@
     display: grid;
     place-items: center;
     font-family: var(--font-family);
+    text-shadow: 0 0 10px #fff,
+    0 0 50px #fff;
     background-color: var(--bg-main); /* Semi-transparent background */
     position: absolute;
     top: 21.8rem;
@@ -56,6 +59,7 @@
 
 .calendar-week-day {
     height: 50px;
+    text-shadow: none;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     font-weight: 600;
@@ -153,7 +157,7 @@
 
 .calendar-days div.curr-date,
 .calendar-days div.curr-date:hover {
-    background-color: var(--blue);
+    background-color: var(--color-currDate);
     color: var(--white);
     border-radius: 50%;
 }
@@ -260,18 +264,24 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    text-shadow: 0 0 10px #fff,
+    0 0 50px #fff;
     color: var(--color-txt);
     font-family: var(--font-family);
 }
 
 .time-picker-row span {
     font-size: 16px;
+    text-shadow: 0 0 10px #fff,
+    0 0 50px #fff;
     font-weight: bold;
 }
 
 .time-picker-row select {
     width: 70px;
     padding: 5px;
+    text-shadow: 0 0 10px #fff,
+    0 0 50px #fff;
     border: 1px solid var(--bg-second);
     border-radius: 5px;
     background-color: var(--bg-main);
@@ -292,6 +302,8 @@
     font-family: quantico;
     position: relative;
     color: #fff;
+    text-shadow: 0 0 10px #fff,
+    0 0 50px #fff;
     height: 40px;
     width: 90px;
     cursor: pointer;
@@ -328,6 +340,8 @@
   #applyConfirmDate {
     font-family: quantico;
     color: #fff;
+    text-shadow: 0 0 10px #fff,
+    0 0 50px #fff;
     position: relative;
     height: 40px;
     width: 90px;
