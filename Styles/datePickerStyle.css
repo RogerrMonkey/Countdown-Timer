@@ -1,49 +1,45 @@
 :root {
     --bg-body: #4d4c5a;
-    --bg-main: black; /* Semi-transparent dark background */
+    --bg-main: black;
     --bg-second: #79788c;
     --color-hover: #323048;
     --color-txt: #f8fbff;
     --color-currDate: #fa7a39;
-
+  
     --blue: #0000ff;
     --white: #fff;
-
+  
     --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-
+  
     --font-family: quantico;
-}
-
-* {
+  }
+  
+  * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-}
-
-.datePicker {
+  }
+  
+  .datePicker {
     display: grid;
     place-items: center;
     font-family: var(--font-family);
-    text-shadow: 0 0 10px #fff,
-    0 0 50px #fff;
-    background-color: var(--bg-main); /* Semi-transparent background */
+    text-shadow: 0 0 10px #fff, 0 0 50px #fff;
+    background-color: var(--bg-main);
     position: absolute;
     top: 21.8rem;
     left: 30rem;
     visibility: hidden;
-    transform: translateY(-20px); /* Start slightly off-screen */
-    transition: all 0.3s ease-in-out; /* Smooth transition */
-
-    height: fit-content; /* Fits the content dynamically */
-    width: fit-content; /* Ensures no unnecessary overflow */
-    border-radius: 30px; /* Rounded corners */
-    padding: 20px; /* Space inside the element */
-    overflow: hidden; /* Prevents content spilling out */
-}
-
-
-
-.calendar-header {
+    transform: translateY(-20px);
+    transition: all 0.3s ease-in-out;
+    height: fit-content;
+    width: fit-content;
+    border-radius: 30px;
+    padding: 20px;
+    overflow: hidden;
+  }
+  
+  .calendar-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,34 +47,33 @@
     font-weight: 600;
     color: var(--color-txt);
     padding: 10px;
-}
-
-.calendar-body {
+  }
+  
+  .calendar-body {
     padding: 10px;
-}
-
-.calendar-week-day {
+  }
+  
+  .calendar-week-day {
     height: 50px;
-    text-shadow: none;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     font-weight: 600;
-}
-
-.calendar-week-day div {
+  }
+  
+  .calendar-week-day div {
     display: grid;
     place-items: center;
     color: var(--bg-second);
-}
-
-.calendar-days {
+  }
+  
+  .calendar-days {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 2px;
     color: var(--color-txt);
-}
-
-.calendar-days div {
+  }
+  
+  .calendar-days div {
     width: 50px;
     height: 50px;
     display: flex;
@@ -88,10 +83,9 @@
     position: relative;
     cursor: pointer;
     animation: to-top 1s forwards;
-    /* border-radius: 50%; */
-}
+  }
 
-.calendar-days div span {
+  .calendar-days div span {
     position: absolute;
 }
 
@@ -175,18 +169,19 @@
     padding: 5px 10px;
     border-radius: 10px;
     cursor: pointer;
-}
-
-.month-picker:hover {
+  }
+  
+  .month-picker:hover,
+  .year-change:hover {
     background-color: var(--color-hover);
-}
-
-.year-picker {
+  }
+  
+  .year-picker {
     display: flex;
     align-items: center;
-}
-
-.year-change {
+  }
+  
+  .year-change {
     height: 40px;
     width: 40px;
     border-radius: 50%;
@@ -194,14 +189,9 @@
     place-items: center;
     margin: 0 10px;
     cursor: pointer;
-}
-
-.year-change:hover {
-    background-color: var(--color-hover);
-}
-
-
-.month-list {
+  }
+  
+  .month-list {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -209,79 +199,73 @@
     left: 0;
     background-color: var(--bg-main);
     padding: 20px;
+    display: grid;
     grid-template-columns: repeat(3, auto);
     gap: 5px;
-    display: grid;
     transform: scale(1.5);
     visibility: hidden;
     pointer-events: none;
-}
-
-.month-list.show {
+  }
+  
+  .month-list.show {
     transform: scale(1);
     visibility: visible;
     pointer-events: visible;
     transition: all 0.2s ease-in-out;
-}
-
-.month-list > div {
+  }
+  
+  .month-list > div {
     display: grid;
     place-items: center;
-}
-
-.month-list > div > div {
+  }
+  
+  .month-list > div > div {
     width: 100%;
     padding: 5px 20px;
     border-radius: 10px;
     text-align: center;
     cursor: pointer;
     color: var(--color-txt);
-}
-
-.month-list > div > div:hover {
+  }
+  
+  .month-list > div > div:hover {
     background-color: var(--color-hover);
-}
-
-@keyframes to-top {
+  }
+  
+  @keyframes to-top {
     0% {
-        transform: translateY(100%);
-        opacity: 0;
+      transform: translateY(100%);
+      opacity: 0;
     }
     100% {
-        transform: translateY(0);
-        opacity: 1;
+      transform: translateY(0);
+      opacity: 1;
     }
-}
-
-.time-picker {
+  }
+  
+  .time-picker {
     margin-top: 10px;
     display: flex;
     flex-direction: column;
     gap: 10px;
-}
-
-.time-picker-row {
+  }
+  
+  .time-picker-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-shadow: 0 0 10px #fff,
-    0 0 50px #fff;
     color: var(--color-txt);
     font-family: var(--font-family);
-}
-
-.time-picker-row span {
+  }
+  
+  .time-picker-row span {
     font-size: 16px;
-    text-shadow: 0 0 10px #fff,
-    0 0 50px #fff;
     font-weight: bold;
-}
-
-.time-picker-row select {
+  }
+  
+  .time-picker-row select {
     width: 70px;
     padding: 5px;
-    text-shadow: 0 0 10px #fff,
-    0 0 50px #fff;
     border: 1px solid var(--bg-second);
     border-radius: 5px;
     background-color: var(--bg-main);
@@ -290,20 +274,19 @@
     font-size: 14px;
     outline: none;
     transition: all 0.3s ease;
-}
-
-.time-picker-row select:hover {
+  }
+  
+  .time-picker-row select:hover {
     border-color: var(--color-hover);
     background-color: var(--color-hover);
-}
-
-
-#cancelConfirmDate {
+  }
+  
+  #cancelConfirmDate,
+  #applyConfirmDate {
     font-family: quantico;
     position: relative;
     color: #fff;
-    text-shadow: 0 0 10px #fff,
-    0 0 50px #fff;
+    text-shadow: 0 0 10px #fff, 0 0 50px #fff;
     height: 40px;
     width: 90px;
     cursor: pointer;
@@ -311,9 +294,21 @@
     border: 1px solid #91C9FF;
     outline: none;
     transition: 1s ease-in-out;
-}
-
-.calenderSVG {
+  }
+  
+  #cancelConfirmDate:hover,
+  #applyConfirmDate:hover {
+    background: #4F95DA;
+  }
+  
+  #cancelConfirmDate span,
+  #applyConfirmDate span {
+    color: white;
+    font-size: 18px;
+    font-weight: 100;
+  }
+  
+  .calenderSVG {
     position: absolute;
     fill: none;
     stroke: #fff;
@@ -321,49 +316,8 @@
     stroke-dashoffset: 150;
     transition: 1s ease-in-out;
   }
-
-  #cancelConfirmDate:hover {
-    transition: 1s ease-in-out;
-    background: #4F95DA;
-  }
   
-  #cancelConfirmDate:hover svg {
-    stroke-dashoffset: -480;
-  }
-  
-  #cancelConfirmDate span {
-    color: white;
-    font-size: 18px;
-    font-weight: 100;
-  }
-
-  #applyConfirmDate {
-    font-family: quantico;
-    color: #fff;
-    text-shadow: 0 0 10px #fff,
-    0 0 50px #fff;
-    position: relative;
-    height: 40px;
-    width: 90px;
-    cursor: pointer;
-    background: transparent;
-    border: 1px solid #91C9FF;
-    outline: none;
-    transition: 1s ease-in-out;
-}
-
-
-#applyConfirmDate:hover {
-    transition: 1s ease-in-out;
-    background: #4F95DA;
-  }
-  
+  #cancelConfirmDate:hover svg,
   #applyConfirmDate:hover svg {
     stroke-dashoffset: -480;
-  }
-  
-  #applyConfirmDate span {
-    color: white;
-    font-size: 18px;
-    font-weight: 100;
   }

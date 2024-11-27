@@ -11,27 +11,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Quantico:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 </head>
 <body>
-   <div class="form-container" >
+  <div class="form-container" >
     <h1 id="title">Chrono Chime</h1>
     <h2 id="tagline">To the last second, we've got you covered.</h2>
-    <button class="chooseDate"><svg width="130px" height="60px" viewBox="0 0 130 60" class="border">
+    <button class="chooseDate">
+      <svg width="130px" height="60px" viewBox="0 0 130 60" class="border">
       <polyline points="129,1 129,59 1,59 1,1 129,1" class="bg-line" />
       <polyline points="129,1 129,59 1,59 1,1 129,1" class="hl-line" />
-    </svg>
-    <span>Choose Date and time</span></button>
+      </svg>
+      <span>Choose Date and time</span>
+    </button>
     <form id="countdownForm">
       <div class="input-group">
         <input type="text" id="purpose" name="purpose" placeholder=" " required>
         <label for="purpose" class="input-label">Enter the Purpose of the Countdown</label>
       </div>
-      <button class="startCountdown" type="submit"><svg width="130px" height="60px" viewBox="0 0 130 60" class="border">
+      <button class="startCountdown" type="submit">
+        <svg width="130px" height="60px" viewBox="0 0 130 60" class="border">
         <polyline points="129,1 129,59 1,59 1,1 129,1" class="bg-line" />
         <polyline points="129,1 129,59 1,59 1,1 129,1" class="hl-line" />
-      </svg>
-      <span>Start Countdown</span></button>
+        </svg>
+        <span>Start Countdown</span>
+      </button>
     </form>
    </div>
-  <div class="datePicker">
+   <div class="datePicker">
     <div class="light">
       <div class="calendar">
         <div class="calendar-header">
@@ -47,58 +51,51 @@
             </div>
         </div>
         <div class="calendar-body">
-            <div class="calendar-week-day">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
-            </div>
+          <div class="calendar-week-day">
+            <div>Sun</div>
+            <div>Mon</div>
+            <div>Tue</div>
+            <div>Wed</div>
+            <div>Thu</div>
+            <div>Fri</div>
+            <div>Sat</div>
+          </div>
             <div class="calendar-days"></div>
         </div>
         <div class="time-picker">
           <div class="time-picker-row">
               <span>Hour</span>
-              <select id="hour-picker">
-                  <!-- Options populated dynamically -->
-              </select>
+              <select id="hour-picker"></select>
           </div>
           <div class="time-picker-row">
               <span>Minute</span>
-              <select id="minute-picker">
-                  <!-- Options populated dynamically -->
-              </select>
+              <select id="minute-picker"></select>
           </div>
-      </div>
+        </div>
         <div class="calendar-footer">
-            <div class="toggle">
-                <span></span>
-                <div class="dark-mode-switch">
-                    <div class="dark-mode-switch-ident"></div>
-                </div>
-            </div>
-            <button id="cancelConfirmDate"><svg id="calenderSVG" width="90px" height="40px" viewBox="0 0 90 40" class="border">
+            <button id="cancelConfirmDate">
+              <svg id="calenderSVG" width="90px" height="40px" viewBox="0 0 90 40" class="border">
               <polyline points="89,1 89,39 1,39 1,1 89,1" class="bg-line" />
               <polyline points="89,1 89,39 1,39 1,1 89,1" class="hl-line" />
-            </svg>
-            <span>Cancel</span></button>
-            <button id="applyConfirmDate"><svg id="calenderSVG2" width="90px" height="40px" viewBox="0 0 90 40" class="border">
+              </svg>
+              <span>Cancel</span>
+            </button>
+            <button id="applyConfirmDate">
+              <svg id="calenderSVG2" width="90px" height="40px" viewBox="0 0 90 40" class="border">
               <polyline points="89,1 89,39 1,39 1,1 89,1" class="bg-line" />
               <polyline points="89,1 89,39 1,39 1,1 89,1" class="hl-line" />
-            </svg>
-            <span>Apply</span></button>
+              </svg>
+              <span>Apply</span>
+            </button>
         </div>
         <div class="month-list"></div>
-    </div>
-  </div>
+      </div>
+      </div>
   <div class="selected-datetime">
     Selected Date & Time: <span id="selectedDateTime">None</span>
-</div>
-
   </div>
-    <video src="Resources/webPageBG.mp4" muted autoplay loop type="video/mp4">Your Browswer Does Not Support the Video Tag</video>
+  </div>
+  <video src="Resources/webPageBG.mp4" muted autoplay loop type="video/mp4">Your Browswer Does Not Support the Video Tag</video>
   <script src="Scripts/index.js"></script>
   <script src="Scripts/datePickerScript.js"></script>
 </body>

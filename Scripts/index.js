@@ -1,11 +1,13 @@
-var ChooseDatebtn = document.querySelector('.chooseDate');
-var datePicker = document.querySelector('.datePicker');
+// Cache DOM Elements
+const chooseDateBtn = document.querySelector(".chooseDate");
+const datePicker = document.querySelector(".datePicker");
+const countdownForm = document.getElementById("countdownForm");
 
-// Check if there's an ongoing countdown when the page loads
-document.addEventListener("DOMContentLoaded", function () {
+// Check for ongoing countdown on page load
+document.addEventListener("DOMContentLoaded", () => {
   const countdownData = getOngoingCountdown();
   if (countdownData) {
-    // Redirect to countdownPage.html if a countdown is ongoing
+    // Redirect to the countdown page if a countdown is ongoing
     window.location.href = "countdownPage.html";
   } else {
     // Replace the current history state to prevent navigating back
@@ -13,54 +15,58 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// Function to check for ongoing countdown in cookies
+// Retrieve ongoing countdown data from cookies
 function getOngoingCountdown() {
-  const cookies = document.cookie.split('; ').reduce((acc, cookie) => {
-    const [key, value] = cookie.split('=');
-    acc[key] = decodeURIComponent(value);
-    return acc;
-  }, {});
+  try {
+    const cookies = Object.fromEntries(
+      document.cookie.split("; ").map((cookie) => {
+        const [key, value] = cookie.split("=");
+        return [key, decodeURIComponent(value)];
+      })
+    );
 
-  // Check if countdownData cookie exists
-  if (cookies['countdownData']) {
-    try {
-      const countdownData = JSON.parse(cookies['countdownData']);
-      // Validate countdownData (ensure it has required fields)
-      if (countdownData && countdownData.purpose && countdownData.date) {
-        return countdownData; // Ongoing countdown
+    if (cookies.countdownData) {
+      const countdownData = JSON.parse(cookies.countdownData);
+
+      // Validate countdown data structure
+      if (countdownData?.purpose && countdownData?.date) {
+        return countdownData;
       }
-    } catch (err) {
-      console.error("Error parsing countdownData cookie:", err);
     }
+  } catch (error) {
+    console.error("Error parsing countdownData cookie:", error);
   }
-  return null; // No ongoing countdown
+  return null;
 }
 
-// Function to toggle the visibility of the date picker
+// Toggle date picker visibility
 function toggleDatePickerVisibility() {
-  if (datePicker.style.visibility === 'hidden' || !datePicker.style.visibility) {
-    datePicker.style.visibility = 'visible';
-  }
+  const isHidden = datePicker.style.visibility === "hidden" || !datePicker.style.visibility;
+  datePicker.style.visibility = isHidden ? "visible" : "hidden";
 }
-// Attach the function to the button's click event
-ChooseDatebtn.addEventListener('click', toggleDatePickerVisibility);
 
-// Handle form submission to set countdown session
-document.getElementById("countdownForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+// Handle date picker toggle
+chooseDateBtn.addEventListener("click", toggleDatePickerVisibility);
+
+// Handle countdown form submission
+countdownForm.addEventListener("submit", (event) => {
+  event.preventDefault();
 
   const purpose = document.getElementById("purpose").value;
-  var date = localStorage.getItem("sharedDate");
+  const date = localStorage.getItem("sharedDate");
 
   if (!date) {
     alert("Please select a date.");
     return;
   }
+
   const countdownData = { purpose, date };
 
-  // Store countdownData in a cookie
-  document.cookie = `countdownData=${encodeURIComponent(JSON.stringify(countdownData))}; path=/`;
+  // Store countdown data in cookies
+  document.cookie = `countdownData=${encodeURIComponent(
+    JSON.stringify(countdownData)
+  )}; path=/`;
 
-  // Navigate to the countdownPage
+  // Redirect to the countdown page
   window.location.href = "countdownPage.html";
 });

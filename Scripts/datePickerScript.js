@@ -1,175 +1,164 @@
-var datePickerDiv = document.querySelector('.datePicker');
-var cancelConfirmDate = document.getElementById('cancelConfirmDate');
-var applyConfirmDate = document.getElementById('applyConfirmDate');
-var selectedDateTimeSpan = document.getElementById('selectedDateTime');
-var hourPicker = document.querySelector('#hour-picker');
-var minutePicker = document.querySelector('#minute-picker');
+// Cache DOM Elements
+const datePickerDiv = document.querySelector('.datePicker');
+const cancelConfirmDate = document.getElementById('cancelConfirmDate');
+const applyConfirmDate = document.getElementById('applyConfirmDate');
+const selectedDateTimeSpan = document.getElementById('selectedDateTime');
+const hourPicker = document.querySelector('#hour-picker');
+const minutePicker = document.querySelector('#minute-picker');
+const calendar = document.querySelector('.calendar');
+const monthPicker = calendar.querySelector('#month-picker');
+const monthList = calendar.querySelector('.month-list');
+const calendarDays = calendar.querySelector('.calendar-days');
+const calendarHeaderYear = calendar.querySelector('#year');
+
+const monthNames = [
+  'January', 'February', 'March', 'April', 'May', 'June', 
+  'July', 'August', 'September', 'October', 'November', 'December'
+];
 
 let selectedDate = null;
 let selectedTime = { hour: '00', minute: '00' };
+let currDate = new Date();
+let currMonth = { value: currDate.getMonth() };
+let currYear = { value: currDate.getFullYear() };
 
+// Utility Functions
+const isLeapYear = (year) => 
+  (year % 4 === 0 && year % 100 !== 0) || (year % 400 === 0);
 
-cancelConfirmDate.addEventListener('click', function (e) {
-    if (datePickerDiv.style.visibility === 'visible'){
-        datePickerDiv.style.visibility = 'hidden';
-    }
+const getFebDays = (year) => (isLeapYear(year) ? 29 : 28);
+
+// Event Handlers
+cancelConfirmDate.addEventListener('click', () => {
+  if (datePickerDiv.style.visibility === 'visible') {
+    datePickerDiv.style.visibility = 'hidden';
+  }
 });
 
-applyConfirmDate.addEventListener('click', function () {
-    if (selectedDate) {
-        const day = selectedDate.getDate().toString().padStart(2, '0'); // Pad single-digit days with leading zero
-        const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0'); // Pad single-digit months with leading zero
-        const year = selectedDate.getFullYear();
-        const hour = hourPicker.value || '00';
-        const minute = minutePicker.value || '00';
-        selectedTime = { hour, minute };
+applyConfirmDate.addEventListener('click', () => {
+  if (!selectedDate) {
+    alert('Please select a date!');
+    return;
+  }
 
-        // Display the selected date and time
-        const formattedDate = `${day}/${month}/${year} ${hour}:${minute}`;
-        selectedDateTimeSpan.textContent = formattedDate;
-        localStorage.setItem("sharedDate", formattedDate);     
-    } else {
-        alert('Please select a date!');
-    }
+  const day = selectedDate.getDate().toString().padStart(2, '0');
+  const month = (selectedDate.getMonth() + 1).toString().padStart(2, '0');
+  const year = selectedDate.getFullYear();
+  const hour = hourPicker.value || '00';
+  const minute = minutePicker.value || '00';
+  selectedTime = { hour, minute };
+
+  const selectedDateTime = new Date(year, selectedDate.getMonth(), day, parseInt(hour), parseInt(minute));
+  const currentDateTime = new Date();
+
+  if (selectedDateTime < currentDateTime) {
+    alert('Please select a date in the future!');
+    return;
+  }
+
+  const formattedDate = `${day}/${month}/${year} ${hour}:${minute}`;
+  selectedDateTimeSpan.textContent = formattedDate;
+  localStorage.setItem("sharedDate", formattedDate);
 });
 
-let calendar = document.querySelector('.calendar')
+// Calendar Generation
+const generateCalendar = (month = currMonth.value, year = currYear.value) => {
+  calendarDays.innerHTML = '';
 
-const month_names = ['January', 'February', 'March', 'April', 
-                     'May', 'June', 'July', 'August', 'September',
-                     'October', 'November', 'December']
+  const daysOfMonth = [
+    31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31
+  ];
+  const firstDay = new Date(year, month, 1).getDay();
 
-isLeapYear = (year) => {
-    return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)
-}
+  monthPicker.textContent = monthNames[month];
+  calendarHeaderYear.textContent = year;
 
-getFebDays = (year) => {
-    return isLeapYear(year) ? 29 : 28
-}
+  for (let i = 0; i < daysOfMonth[month] + firstDay; i++) {
+    const day = document.createElement('div');
 
-generateCalendar = (month, year) => {
+    if (i >= firstDay) {
+      const dayNumber = i - firstDay + 1;
+      day.textContent = dayNumber;
+      day.classList.add('calendar-day-hover');
+      day.innerHTML += `<span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>`
+      if (
+        dayNumber === currDate.getDate() &&
+        year === currDate.getFullYear() &&
+        month === currDate.getMonth()
+      ) {
+        day.classList.add('curr-date');
+      }
 
-    let calendar_days = calendar.querySelector('.calendar-days')
-    let calendar_header_year = calendar.querySelector('#year')
+      day.addEventListener('click', () => {
+        selectedDate = new Date(year, month, dayNumber);
 
-    let days_of_month = [31, getFebDays(year), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-
-    calendar_days.innerHTML = ''
-
-    let currDate = new Date()
-    if (!month) month = currDate.getMonth()
-    if (!year) year = currDate.getFullYear()
-
-    let curr_month = `${month_names[month]}`
-    month_picker.innerHTML = curr_month
-    calendar_header_year.innerHTML = year
-
-    // get first day of month
-    
-    let first_day = new Date(year, month, 1)
-
-    for (let i = 0; i <= days_of_month[month] + first_day.getDay() - 1; i++) {
-        let day = document.createElement('div')
-        if (i >= first_day.getDay()) {
-            day.classList.add('calendar-day-hover')
-            day.innerHTML = i - first_day.getDay() + 1
-            day.innerHTML += `<span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>`
-            if (i - first_day.getDay() + 1 === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
-                day.classList.add('curr-date')
-            }
-        }
-        day.addEventListener('click', () => {
-            const dayNumber = i - first_day.getDay() + 1;
-            selectedDate = new Date(year, month, dayNumber);
-            const previouslySelectedDay = calendar.querySelector('.selected');
-                if (previouslySelectedDay) {
-                    previouslySelectedDay.classList.remove('selected');
-                }
-            day.classList.add('selected')
-
-            // Highlight the selected date
-            document.querySelectorAll('.calendar-day-hover').forEach(dayEl => dayEl.classList.remove('selected-date'));
-            day.classList.add('selected-date');
-        });
-
-        if (
-            i - first_day.getDay() + 1 === currDate.getDate() &&
-            year === currDate.getFullYear() &&
-            month === currDate.getMonth()
-        ) {
-            day.classList.add('curr-date');
-        }
-        
-        calendar_days.appendChild(day)
+        // Highlight the selected date
+        calendar.querySelectorAll('.calendar-day-hover').forEach(el => el.classList.remove('selected-date'));
+        day.classList.add('selected-date');
+      });
     }
-}
-// Add styles to the selected date
+
+    calendarDays.appendChild(day);
+  }
+};
+
+// Populate Month List
+monthNames.forEach((name, index) => {
+  const month = document.createElement('div');
+  month.innerHTML = `<div data-month="${index}">${name}</div>`;
+  month.querySelector('div').addEventListener('click', () => {
+    monthList.classList.remove('show');
+    generateCalendar(index, currYear.value);
+  });
+  monthList.appendChild(month);
+});
+
+// Populate Time Pickers
+const populateTimePicker = () => {
+  for (let i = 0; i < 24; i++) {
+    const hourOption = document.createElement('option');
+    hourOption.value = i.toString().padStart(2, '0');
+    hourOption.textContent = hourOption.value;
+    hourPicker.appendChild(hourOption);
+  }
+
+  for (let i = 0; i < 60; i++) {
+    const minuteOption = document.createElement('option');
+    minuteOption.value = i.toString().padStart(2, '0');
+    minuteOption.textContent = minuteOption.value;
+    minutePicker.appendChild(minuteOption);
+  }
+};
+
+// Navigation Handlers
+document.querySelector('#prev-year').addEventListener('click', () => {
+  currYear.value--;
+  generateCalendar(currMonth.value, currYear.value);
+});
+
+document.querySelector('#next-year').addEventListener('click', () => {
+  currYear.value++;
+  generateCalendar(currMonth.value, currYear.value);
+});
+
+monthPicker.addEventListener('click', () => {
+  monthList.classList.toggle('show');
+});
+
+// Add Selected Date Styling
 const style = document.createElement('style');
 style.textContent = `
-    .calendar-day-hover.selected-date {
-        background-color: #007bff;
-        color: white;
-        border-radius: 50%;
-    }
+  .calendar-day-hover.selected-date {
+    background-color: #007bff;
+    color: white;
+    border-radius: 50%;
+  }
 `;
+document.head.appendChild(style); 
 
-let month_list = calendar.querySelector('.month-list')
-
-month_names.forEach((e, index) => {
-    let month = document.createElement('div')
-    month.innerHTML = `<div data-month="${index}">${e}</div>`
-    month.querySelector('div').onclick = () => {
-        month_list.classList.remove('show')
-        curr_month.value = index
-        generateCalendar(index, curr_year.value)
-    }
-    month_list.appendChild(month)
-})
-
-let month_picker = calendar.querySelector('#month-picker')
-
-month_picker.onclick = () => {
-    month_list.classList.add('show')
-}
-
-let currDate = new Date()
-
-let curr_month = {value: currDate.getMonth()}
-let curr_year = {value: currDate.getFullYear()}
-
-generateCalendar(curr_month.value, curr_year.value)
-
-document.querySelector('#prev-year').onclick = () => {
-    --curr_year.value
-    generateCalendar(curr_month.value, curr_year.value)
-}
-
-document.querySelector('#next-year').onclick = () => {
-    ++curr_year.value
-    generateCalendar(curr_month.value, curr_year.value)
-}
-
-const populateTimePicker = () => {
-    const hourPicker = document.querySelector('#hour-picker');
-    const minutePicker = document.querySelector('#minute-picker');
-
-    // Populate hours (0-23)
-    for (let i = 0; i < 24; i++) {
-        const hourOption = document.createElement('option');
-        hourOption.value = i;
-        hourOption.textContent = i.toString().padStart(2, '0'); // Pad with leading zero
-        hourPicker.appendChild(hourOption);
-    }
-    // Populate minutes (0-59)
-    for (let i = 0; i < 60; i++) {
-        const minuteOption = document.createElement('option');
-        minuteOption.value = i;
-        minuteOption.textContent = i.toString().padStart(2, '0'); // Pad with leading zero
-        minutePicker.appendChild(minuteOption);
-    }
-};
-// Initialize Time Picker
+// Initialization
 populateTimePicker();
+generateCalendar();
