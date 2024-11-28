@@ -212,11 +212,11 @@ svg {
   }
 
   .time-value {
-    font-size: 0.7rem;
+    font-size: 1rem;
   }
 
   .time-label {
-    font-size: 0.1rem;
+    font-size: 0.7rem;
   }
 
   #stop-btn {
