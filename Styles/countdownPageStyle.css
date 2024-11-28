@@ -159,3 +159,72 @@ svg {
   font-size: 18px;
   font-weight: 100;
 }
+
+@media (max-width: 1024px) {
+  h1 {
+    font-size: 4rem;
+  }
+
+  .time-value {
+    font-size: 2rem;
+  }
+
+  .time-label {
+    font-size: 0.5rem;
+  }
+
+  #stop-btn {
+    width: 120px;
+    height: 50px;
+  }
+
+  #stop-btn span {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .time-value {
+    font-size: 1rem;
+  }
+
+  .time-label {
+    font-size: 0.3rem;
+  }
+
+  #stop-btn {
+    width: 100px;
+    height: 45px;
+  }
+
+  #stop-btn span {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.3rem;
+  }
+
+  .time-value {
+    font-size: 0.7rem;
+  }
+
+  .time-label {
+    font-size: 0.1rem;
+  }
+
+  #stop-btn {
+    width: 90px;
+    height: 40px;
+  }
+
+  #stop-btn span {
+    font-size: 12px;
+  }
+}

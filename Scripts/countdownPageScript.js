@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
     startCountdown(countdownData);
   } else {
     alert("No countdown in progress. Redirecting to the form page.");
-    window.location.href = "index.html"; // Replace with your actual form page URL
+    window.location.href = "index.html";
   }
 });
 
