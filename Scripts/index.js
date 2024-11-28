@@ -2,6 +2,8 @@
 const chooseDateBtn = document.querySelector(".chooseDate");
 const datePicker = document.querySelector(".datePicker");
 const countdownForm = document.getElementById("countdownForm");
+const modalOverlay = document.getElementById('modalOverlay');
+
 
 // Check for ongoing countdown on page load
 document.addEventListener("DOMContentLoaded", () => {
@@ -43,7 +45,14 @@ function getOngoingCountdown() {
 function toggleDatePickerVisibility() {
   const isHidden = datePicker.style.visibility === "hidden" || !datePicker.style.visibility;
   datePicker.style.visibility = isHidden ? "visible" : "hidden";
+  datePicker.style.display = 'block';
+  modalOverlay.style.display = 'block';
 }
+
+modalOverlay.addEventListener('click', () => {
+  datePicker.style.display = 'none';
+  modalOverlay.style.display = 'none';
+});
 
 // Handle date picker toggle
 chooseDateBtn.addEventListener("click", toggleDatePickerVisibility);

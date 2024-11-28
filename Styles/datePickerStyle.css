@@ -26,17 +26,21 @@
     font-family: var(--font-family);
     text-shadow: 0 0 10px #fff, 0 0 50px #fff;
     background-color: var(--bg-main);
-    position: absolute;
-    top: 21.8rem;
-    left: 30rem;
     visibility: hidden;
-    transform: translateY(-20px);
     transition: all 0.3s ease-in-out;
     height: fit-content;
     width: fit-content;
     border-radius: 30px;
-    padding: 20px;
     overflow: hidden;
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 1s ease-in-out;
   }
   
   .calendar-header {

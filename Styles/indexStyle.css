@@ -1,13 +1,14 @@
 body {
-  font-family: quantico;
-  text-align: center;
-  background-color: #f0f8ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #ffffff;
+  font-family: 'Quantico', sans-serif;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: #f0f4f8;
+  color: #f0f4f8;
 }
 
 video {
@@ -20,19 +21,49 @@ video {
   z-index: -1;
 }
 
+.form-container {
+  text-align: center;
+  padding: 40px;
+  border-radius: 40px;
+  box-shadow: 0 0 15px 3px white, inset 0 4px 10px rgba(0, 0, 0, 0.8); /* Black inner shadow */
+  background: rgba(0, 0, 0, 0.7); /* For better readability over the video */
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 #title {
-  font-size: 8rem;
+  font-size: 5rem;
   text-shadow: 0 0 10px #fff, 0 0 50px #fff;
 }
 
 #tagline {
+  font-size: 1.4rem;
   text-shadow: 0 0 10px #fff, 0 0 50px #fff;
 }
 
 .input-group {
-  position: absolute;
-  top: 16rem;
-  width: 900px;
+  position: relative;
+  margin: 20px 0;
+  width: 100%;
+  max-width: 600px;
   text-shadow: 0 0 10px #fff, 0 0 50px #fff;
 }
 
@@ -70,16 +101,17 @@ video {
 
 .chooseDate,
 .startCountdown {
-  position: absolute;
+  position: relative;
   width: 130px;
   height: 60px;
-  font-family: quantico;
+  font-family: Quantico;
   text-shadow: 0 0 10px #fff, 0 0 50px #fff;
   cursor: pointer;
   background: transparent;
   border: 1px solid #91C9FF;
   outline: none;
   transition: 1s ease-in-out;
+  margin: 10px;
 }
 
 .chooseDate:hover,
@@ -110,12 +142,75 @@ svg {
   font-weight: 100;
 }
 
-.chooseDate {
-  top: 20.6rem;
-  right: 66.4rem;
+/* Responsive Adjustments */
+@media (max-width: 1024px) {
+  #title {
+    font-size: 3rem;
+  }
+
+  #tagline {
+    font-size: 1rem;
+  }
+
+  .input-group {
+    width: 90%;
+  }
+
+  .chooseDate,
+  .startCountdown {
+    width: 120px;
+    height: 50px;
+  }
+
+  .chooseDate span,
+  .startCountdown span {
+    font-size: 16px;
+  }
 }
 
-.startCountdown {
-  top: 20.6rem;
-  right: 18rem;
+@media (max-width: 768px) {
+  #title {
+    font-size: 2.5rem;
+  }
+
+  .form-container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .chooseDate,
+  .startCountdown {
+    width: 100px;
+    height: 45px;
+  }
+
+  .chooseDate span,
+  .startCountdown span {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  #title {
+    font-size: 2rem;
+  }
+
+  #tagline {
+    font-size: 0.9rem;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  .chooseDate,
+  .startCountdown {
+    width: 90px;
+    height: 40px;
+  }
+
+  .chooseDate span,
+  .startCountdown span {
+    font-size: 12px;
+  }
 }

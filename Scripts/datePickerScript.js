@@ -32,6 +32,8 @@ const getFebDays = (year) => (isLeapYear(year) ? 29 : 28);
 cancelConfirmDate.addEventListener('click', () => {
   if (datePickerDiv.style.visibility === 'visible') {
     datePickerDiv.style.visibility = 'hidden';
+    datePicker.style.display = 'none';
+    modalOverlay.style.display = 'none';
   }
 });
 
